@@ -192,13 +192,18 @@
   .pin.off-screen .pin-card { display: none; }
   .off-arrow {
     display: none;
-    width: 36px; height: 36px;
+    width: 44px; height: 36px;
+    padding: 0 6px;
     background: rgba(0,0,0,0.7);
     border: 1px solid var(--accent);
     color: var(--accent);
     font-family: 'Roboto', sans-serif;
-    font-size: 10px;
+    font-size: 11px; font-weight: 400;
+    line-height: 1;
+    letter-spacing: 0.05em;
     align-items: center; justify-content: center;
+    gap: 4px;
+    white-space: nowrap;
     backdrop-filter: blur(8px);
   }
   .pin.off-screen .off-arrow { display: flex; }
@@ -1310,7 +1315,7 @@ function renderARPins() {
       const y = h * 0.5;
       pin.style.transform = `translate(${x}px, ${y}px)`;
       pin.style.opacity = '0.7';
-      pin.querySelector('.off-arrow').textContent = (side === 'right' ? '▶' : '◀') + ' ' + l.distance.toFixed(1) + 'mi';
+      pin.querySelector('.off-arrow').textContent = (side === 'right' ? '›' : '‹') + ' ' + l.distance.toFixed(1) + 'mi';
     }
 
     // Price color hint
