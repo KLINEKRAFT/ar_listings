@@ -168,14 +168,36 @@
     background-size: cover; background-position: center;
     border: 1px solid var(--line);
   }
-  .pin-price { font-family: 'Bauziet', 'Helvetica Neue', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+  .pin-address {
+    font-family: 'Bauziet', 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    color: var(--fg);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   .pin-specs { display: flex; gap: 8px; font-size: 9px; letter-spacing: 0.1em; color: var(--dim); text-transform: uppercase; }
   .pin-specs span { display: flex; gap: 3px; }
   .pin-specs span b { color: var(--fg); font-weight: 500; }
+  .pin-price-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 8px;
+  }
+  .pin-price {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--fg);
+  }
   .pin-distance {
-    font-size: 9px; letter-spacing: 0.15em; color: var(--accent);
+    font-size: 9px; letter-spacing: 0.12em; color: var(--accent);
     text-transform: uppercase;
-    display: flex; justify-content: space-between; align-items: center;
+    display: inline-flex; align-items: center; gap: 5px;
+    white-space: nowrap;
   }
   .pin-needle {
     width: 12px; height: 12px;
@@ -467,21 +489,27 @@
   }
   .pg-thumb.active { opacity: 1; border-color: var(--accent); }
   .ec-body { padding: 20px 16px 80px; }
-  .ec-price-row {
-    display: flex; justify-content: space-between; align-items: baseline;
-    margin-bottom: 6px;
-  }
-  .ec-price {
-    font-family: 'Bauziet', 'Helvetica Neue', sans-serif;
-    font-weight: 700; font-size: 32px;
-    letter-spacing: -0.02em;
-  }
-  .ec-status {
-    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);
+  .ec-headline {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
   }
   .ec-address {
-    font-size: 13px; color: var(--dim); margin-bottom: 20px;
-    text-transform: uppercase; letter-spacing: 0.05em;
+    font-family: 'Bauziet', 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--fg);
+    flex: 1;
+    min-width: 0;
+  }
+  .ec-status {
+    flex-shrink: 0;
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 8px;
+    margin-top: 6px;
   }
   .ec-stats-grid {
     display: grid; grid-template-columns: repeat(2, 1fr);
@@ -490,6 +518,12 @@
     border: 1px solid var(--line);
     margin-bottom: 24px;
   }
+  .ec-stat.ec-stat-price {
+    grid-column: 1 / -1;
+    background: var(--brand-navy);
+  }
+  .ec-stat.ec-stat-price .ec-stat-val { color: var(--fg); font-size: 28px; }
+  .ec-stat.ec-stat-price .ec-stat-lbl { color: rgba(255,255,255,0.7); }
   .ec-stat {
     background: var(--bg);
     padding: 14px 12px;
@@ -632,6 +666,9 @@
     padding: 12px 16px;
     border-bottom: 1px solid var(--line);
     align-items: center;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(255,255,255,0.06);
   }
   .list-item:active { background: rgba(255,255,255,0.04); }
   .list-photo {
@@ -639,13 +676,35 @@
     background: #1a1a1a;
     background-size: cover; background-position: center;
     border: 1px solid var(--line);
+    pointer-events: none;
   }
-  .list-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-  .list-price { font-family: 'Bauziet', 'Helvetica Neue', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
-  .list-addr { font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .list-meta { display: flex; gap: 10px; font-size: 9px; letter-spacing: 0.1em; color: var(--dim); text-transform: uppercase; margin-top: 2px; }
+  .list-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; pointer-events: none; }
+  .list-addr {
+    font-family: 'Bauziet', 'Helvetica Neue', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    color: var(--fg);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .list-meta {
+    display: flex; gap: 10px; align-items: baseline;
+    font-size: 10px; letter-spacing: 0.1em;
+    color: var(--dim); text-transform: uppercase;
+    margin-top: 2px;
+  }
   .list-meta b { color: var(--fg); font-weight: 500; }
+  .list-meta .li-price {
+    font-family: 'Roboto', sans-serif;
+    color: var(--fg);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
   .list-meta .dist { color: var(--accent); margin-left: auto; }
+  .list-fav { color: var(--accent); font-size: 11px; }
 
   /* ============ FILTERS ============ */
   .filter-section { padding: 16px; border-bottom: 1px solid var(--line); }
@@ -1061,7 +1120,7 @@ function toggleFav(id) {
   else state.favorites.add(id);
   saveFavs();
   applyFilters();
-  if (state.selectedId === id) renderExpandedCard(state.listings.find((l) => l.id === id));
+  if (String(state.selectedId) === String(id)) renderExpandedCard(state.listings.find((l) => String(l.id) === String(id)));
 }
 
 /* =========================================================
@@ -1350,22 +1409,36 @@ function makePinEl(l) {
   pin.innerHTML = `
     <div class="pin-card">
       <div class="pin-photo" style="${l.primaryPhoto ? `background-image:url('${l.primaryPhoto}')` : ''}"></div>
-      <div class="pin-price">${fmtPrice(l.price)}</div>
+      <div class="pin-address">${pinAddress(l)}</div>
       <div class="pin-specs">
         <span><b>${l.beds ?? '—'}</b>BD</span>
         <span><b>${l.baths ?? '—'}</b>BA</span>
-        <span><b>${l.garage ?? '—'}</b>GAR</span>
+        <span><b>${fmtSqftShort(l.sqft)}</b>SF</span>
       </div>
-      <div class="pin-distance">
-        <span>${l.distance.toFixed(2)} MI</span>
-        <span>${shortBearing(l.bearing)}</span>
+      <div class="pin-price-row">
+        <span class="pin-price">${fmtPrice(l.price)}</span>
+        <span class="pin-distance">
+          <span>${l.distance.toFixed(2)} MI</span>
+          <span>${shortBearing(l.bearing)}</span>
+        </span>
       </div>
       <div class="fav-mark"></div>
     </div>
     <div class="off-arrow"></div>
   `;
-  pin.addEventListener('click', () => openExpanded(l.id));
   return pin;
+}
+
+function pinAddress(l) {
+  if (l.streetAddress) return l.streetAddress;
+  if (l.fullAddress) return l.fullAddress.split(',')[0];
+  return '—';
+}
+
+function fmtSqftShort(n) {
+  if (!n || isNaN(n)) return '—';
+  if (n >= 1000) return (n / 1000).toFixed(n >= 10000 ? 0 : 1) + 'K';
+  return String(n);
 }
 
 /* =========================================================
@@ -1446,12 +1519,15 @@ function renderList() {
   state.filtered.forEach((l) => {
     const item = document.createElement('div');
     item.className = 'list-item';
+    item.dataset.id = l.id;
+    item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
     item.innerHTML = `
       <div class="list-photo" style="${l.primaryPhoto ? `background-image:url('${l.primaryPhoto}')` : ''}"></div>
       <div class="list-info">
-        <div class="list-price">${fmtPrice(l.price)}${state.favorites.has(l.id) ? ' <span style="color:var(--accent);font-size:11px;">★</span>' : ''}</div>
-        <div class="list-addr">${l.fullAddress || '—'}</div>
+        <div class="list-addr">${l.fullAddress || '—'}${state.favorites.has(l.id) ? ' <span class="list-fav">★</span>' : ''}</div>
         <div class="list-meta">
+          <span class="li-price">${fmtPrice(l.price)}</span>
           <span><b>${l.beds ?? '—'}</b> BD</span>
           <span><b>${l.baths ?? '—'}</b> BA</span>
           <span><b>${fmtNumber(l.sqft)}</b> SQFT</span>
@@ -1459,10 +1535,6 @@ function renderList() {
         </div>
       </div>
     `;
-    item.addEventListener('click', () => {
-      closeDrawer('listDrawer');
-      openExpanded(l.id);
-    });
     body.appendChild(item);
   });
 }
@@ -1471,7 +1543,7 @@ function renderList() {
    EXPANDED CARD
    ========================================================= */
 function openExpanded(id) {
-  const l = state.listings.find((x) => x.id === id);
+  const l = state.listings.find((x) => String(x.id) === String(id));
   if (!l) return;
   state.selectedId = id;
   state.expandedPhotoIdx = 0;
@@ -1510,13 +1582,16 @@ function renderExpandedCard(l) {
       ` : ''}
     </div>
     <div class="ec-body">
-      <div class="ec-price-row">
-        <div class="ec-price">${fmtPrice(l.price)}</div>
+      <div class="ec-headline">
+        <div class="ec-address">${l.fullAddress || '—'}</div>
         ${l.status ? `<div class="ec-status">${l.status}</div>` : ''}
       </div>
-      <div class="ec-address">${l.fullAddress || '—'}</div>
 
       <div class="ec-stats-grid">
+        <div class="ec-stat ec-stat-price">
+          <div class="ec-stat-val">${fmtPrice(l.price)}</div>
+          <div class="ec-stat-lbl">Price</div>
+        </div>
         <div class="ec-stat">
           <div class="ec-stat-val">${l.beds ?? '—'}</div>
           <div class="ec-stat-lbl">Bedrooms</div>
@@ -1751,6 +1826,53 @@ $('#btnList').addEventListener('click', () => openDrawer('listDrawer'));
 $('#btnFilter').addEventListener('click', () => openDrawer('filterDrawer'));
 $('#btnRefresh').addEventListener('click', fetchListings);
 $$('[data-close]').forEach((b) => b.addEventListener('click', () => closeDrawer(b.dataset.close)));
+
+/* =========================================================
+   CLICK DELEGATION — iOS Safari is unreliable about delivering click
+   events to dynamically-added children of fixed/transformed
+   containers. Delegating from a stable parent and reacting to the
+   first of {click, touchend} that arrives is far more robust.
+   ========================================================= */
+function bindCardOpen(rootSel, childSel, onActivate) {
+  const root = $(rootSel);
+  if (!root) return;
+  let lastHandledTs = 0;
+  let touchStartXY = null;
+  let touchMoved = false;
+  root.addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+    touchStartXY = t ? { x: t.clientX, y: t.clientY } : null;
+    touchMoved = false;
+  }, { passive: true });
+  root.addEventListener('touchmove', (e) => {
+    if (!touchStartXY) return;
+    const t = e.touches[0];
+    if (!t) return;
+    if (Math.abs(t.clientX - touchStartXY.x) > 8 || Math.abs(t.clientY - touchStartXY.y) > 8) {
+      touchMoved = true;
+    }
+  }, { passive: true });
+  const activate = (e) => {
+    const target = e.target.closest(childSel);
+    if (!target || !root.contains(target)) return;
+    const id = target.dataset.id;
+    if (!id) return;
+    if (e.timeStamp - lastHandledTs < 600) return;
+    lastHandledTs = e.timeStamp;
+    onActivate(id, target, e);
+  };
+  root.addEventListener('click', activate);
+  root.addEventListener('touchend', (e) => {
+    if (touchMoved) return;
+    activate(e);
+  }, { passive: true });
+}
+
+bindCardOpen('#arLayer', '.pin', (id) => openExpanded(id));
+bindCardOpen('#listBody', '.list-item', (id) => {
+  closeDrawer('listDrawer');
+  openExpanded(id);
+});
 
 /* =========================================================
    FILTER UI
