@@ -132,19 +132,23 @@
   .reticle::after { left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); }
 
   /* ============ AR PINS ============ */
+  /* arLayer must NOT use pointer-events:none — iOS Safari has a hit-testing
+     quirk where descendants that re-enable pointer-events alongside
+     backdrop-filter can become untappable. Empty space inside arLayer has
+     no handler, so swallowing those clicks is harmless. The HUD, drawers,
+     and expanded card sit at higher z-index and stay tappable. */
   #arLayer {
     position: absolute; inset: 0;
-    pointer-events: none;
     z-index: 7;
     overflow: hidden;
   }
   .pin {
     position: absolute;
-    pointer-events: auto;
     transform-origin: center bottom;
     transition: opacity 0.2s ease;
     cursor: pointer;
     will-change: transform;
+    touch-action: manipulation;
   }
   .pin-card {
     background: rgba(0, 0, 0, 0.82);
@@ -156,6 +160,7 @@
     max-width: 180px;
     display: flex; flex-direction: column; gap: 6px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    pointer-events: auto;
   }
   .pin-photo {
     width: 100%; aspect-ratio: 16/10;
@@ -205,6 +210,7 @@
     gap: 4px;
     white-space: nowrap;
     backdrop-filter: blur(8px);
+    pointer-events: auto;
   }
   .pin.off-screen .off-arrow { display: flex; }
 
